@@ -31,6 +31,18 @@ class HashTable1:
                 current = current.next
             current.next = new_node
             self.collisions += 1 #increment the collision counter
+
+    def lookup ( self, key ):
+        index = self.hash_func ( key ) % self.size #calculate the index using the hash function and modulo operator
+        current = self.table [ index ] #get the node at the calculated index
+
+        while current is not None: #traverse the linked list at the index to find the key
+            if current.key == key: #if the key is found return the value
+                return current.value
+            current = current.next #move to the next node in the linked list
+        
+        return None #if the key is not found, return None
+
     def find_wasted_space ( self ):
         return sum ( 1 for bucket in self.table if bucket is None ) #count the number of empty buckets in the hash table
     
@@ -54,6 +66,19 @@ class HashTable2:
             self.collisions += 1 #increment the collision counter
         
         self.table [ index ] = Node ( key, value ) #insert the new node at the calculated index
+
+    def lookup ( self, key ):
+        index = self.hash_func ( key ) % self.size #calculate the index using the hash function and modulo operator
+        startIndex = index #store the starting index to detect if we have looped through the entire table
+        while self.table [ index ] is not None: #traverse the table to find the key
+            storedKey, storedValue = self.table [ index ]
+            if storedKey == key: #if the key is found return the value
+                return storedValue
+            index = ( index + 1 ) % self.size #increment the index and wrap around if it exceeds the size of the table
+            if index == startIndex: #if we have looped through the entire table and come back to the starting index, the key is not found
+                break
+        
+        return None #if the key is not found, return None
 
     def find_wasted_space ( self ):
         return sum ( 1 for bucket in self.table if bucket is None ) #count the number of empty buckets in the hash table
