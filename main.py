@@ -1,5 +1,6 @@
 import time
 from hashTables import *
+from hashFunctions import *
 from movie import Movie
 
 #function to load the data from a file
