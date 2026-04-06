@@ -45,12 +45,12 @@ def testHashTables ( movies, tableType, hashFunc, keyType ):
 
     lookupTime = time.time() - startTime #end the timer
 
-    print ( "\nTable Type:             ", tableType )
-    print ( "Hash Function:          ", hashFunc.__name__ )
-    print ( "HashTable insert time:  ", insertTime )
-    print ( "HashTable lookup time:  ", lookupTime )
-    print ( "HashTable collisions:   ", ht.collisions )
-    print ( "HashTable wasted space: ", ht.find_wasted_space() )
+    print ( "\nTable Type:                   ", tableType, ",", keyType, "Search" )
+    print ( "Hash Function:                ", hashFunc.__name__ )
+    print ( "HashTable Construction time:  ", insertTime )
+    print ( "HashTable lookup time:        ", lookupTime )
+    print ( "HashTable collisions:         ", ht.collisions )
+    print ( "HashTable wasted space:       ", ht.find_wasted_space() )
 
 def main():
     movies = dataLoader ( 'MOCK_DATA.csv' ) #load the movies from the file
@@ -59,15 +59,15 @@ def main():
     #attempt 1: linked list implementation with poor hash function
     print ( "\nAttempt 1:" )
     testHashTables ( movies, "linkedList", linkedList_poor, "title" )
-    #attempt 2: linked list implementation with good hash function
-    print ( "\nAttempt 2:" )
-    testHashTables ( movies, "linkedList", linkedList_good, "title" )
-    #attempt 3: linear probing implementation with poor hash function
-    print ( "\nAttempt 3:" )
-    testHashTables ( movies, "linearProbing", linearProbing_good, "quote" )
-    #attempt 4: linear probing implementation with good hash function
-    print ( "\nAttempt 4:" )
-    testHashTables ( movies, "linearProbing", linearProbing_poor, "quote" )
+    # #attempt 2: linked list implementation with good hash function
+    # print ( "\nAttempt 2:" )
+    # testHashTables ( movies, "linkedList", linkedList_good, "title" )
+    # #attempt 3: linear probing implementation with poor hash function
+    # print ( "\nAttempt 3:" )
+    # testHashTables ( movies, "linearProbing", linearProbing_good, "quote" )
+    # #attempt 4: linear probing implementation with good hash function
+    # print ( "\nAttempt 4:" )
+    # testHashTables ( movies, "linearProbing", linearProbing_poor, "quote" )
 
 if __name__ == "__main__":
     main()
