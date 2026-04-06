@@ -75,8 +75,11 @@ def main():
     # print ( "\nAttempt 6:" )
     # testHashTables ( movies, "linearProbing", linearProbing_poor, "quote" )
     # #attempt 7: linear probing implementation with poor hash function
-    print ( "\nAttempt 7:" )
-    testHashTables ( movies, "linearProbing", linearProbing_good, "quote" )
+    # print ( "\nAttempt 7:" )
+    # testHashTables ( movies, "linearProbing", linearProbing_good, "quote" )
+    #attempt 8: linear probing implementation with better hash function
+    print ( "\nAttempt 8:" )
+    testHashTables ( movies, "linearProbing", linearProbing_better, "quote" )
 
 if __name__ == "__main__":
     main()

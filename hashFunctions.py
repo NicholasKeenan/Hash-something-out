@@ -35,3 +35,9 @@ def linearProbing_good ( key ):
     for char in key:
         total += ord(char)
     return total #this hash function will return the sum of the ASCII values of the characters in the key
+
+def linearProbing_better ( key ):
+    total = 0
+    for char in key:
+        total += ord(char) * (key.index(char) + 1) #multiply the ASCII value of the character by its index so it is less likely to collide
+    return total
