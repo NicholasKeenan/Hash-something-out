@@ -4,6 +4,11 @@ from hashTables import *
 from hashFunctions import *
 from movie import Movie
 
+#Main file to test the hash tables and hash functions
+#This file will load the data from the file, 
+# create the hash tables, and test the insertions and lookups while timing 
+# them and counting collisions and wasted space
+
 #function to load the data from a file
 def dataLoader ( filename ):
 

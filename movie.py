@@ -1,4 +1,7 @@
 #movie class to hold data for each movie record, this will be used as the value in the hash tables
+#the movie class will have the following attributes:
+#movie_title, genre, release_date, director, box_office_revenue, rating, duration_minutes, production_company, quote
+
 class Movie:
     def __init__ ( self, movie_title, genre, release_date, director, box_office_revenue, rating, duration_minutes, production_company, quote ):
         self.movie_title = movie_title

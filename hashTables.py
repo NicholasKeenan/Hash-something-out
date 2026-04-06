@@ -1,4 +1,7 @@
 #A simple implementation of a hash table in python
+#There are two hash table implementations, one using a linked list and 
+#the other using linear probing
+#The hash tables will be tested with different hash functions to see how they perform in terms of collisions and wasted space
 
 #Node class to hold the key-value pairs for the hash table
 class Node:

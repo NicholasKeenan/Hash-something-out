@@ -1,4 +1,6 @@
-#functions for hashing and collision resolution
+#File that contains the hash functions for the hash tables, these functions will be used to calculate
+#the index for each key in the hash tables
+#the hash functions will be tested in the main file to see how they perform with the different hash table implementations
 
 def linkedList_poor ( key ):
     return len ( key ) #this hash function will return the length of the key, which is not a good hash function because it will cause collisions for keys of the same length
