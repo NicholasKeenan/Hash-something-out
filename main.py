@@ -60,12 +60,15 @@ def main():
     # print ( "\nAttempt 1:" )
     # testHashTables ( movies, "linkedList", linkedList_poor, "title" )
     #attempt 2: linked list implementation with good hash function
-    print ( "\nAttempt 2:" )
-    testHashTables ( movies, "linkedList", linkedList_good, "title" )
-    # #attempt 3: linear probing implementation with poor hash function
+    # print ( "\nAttempt 2:" )
+    # testHashTables ( movies, "linkedList", linkedList_good, "title" )
+    #attempt 3: linked list implementation with better hash function
+    print ( "\nAttempt 3:" )
+    testHashTables ( movies, "linkedList", linkedList_better, "title" )
+    # #attempt 6: linear probing implementation with poor hash function
     # print ( "\nAttempt 3:" )
     # testHashTables ( movies, "linearProbing", linearProbing_good, "quote" )
-    # #attempt 4: linear probing implementation with good hash function
+    # #attempt 7: linear probing implementation with good hash function
     # print ( "\nAttempt 4:" )
     # testHashTables ( movies, "linearProbing", linearProbing_poor, "quote" )
 
