@@ -41,3 +41,9 @@ def linearProbing_better ( key ):
     for char in key:
         total += ord(char) * (key.index(char) + 1) #multiply the ASCII value of the character by its index so it is less likely to collide
     return total
+
+def linearProbing_better2 ( key ):
+    total = 0
+    for char in key:
+        total += ord(char) * (key.index(char) + 1) #multiply the ASCII value of the character by its index so it is less likely to collide
+    return total * len ( key ) #multiply the total by the length of the key to reduce collisions again
