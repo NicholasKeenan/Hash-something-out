@@ -56,15 +56,18 @@ def main():
     movies = dataLoader ( 'MOCK_DATA.csv' ) #load the movies from the file
     tableSize = len ( movies ) * 2 #set the table size to be twice the number of records to reduce collisions
     
-    #attempt 1: linked list implementation with poor hash function
+    # #attempt 1: linked list implementation with poor hash function
     # print ( "\nAttempt 1:" )
     # testHashTables ( movies, "linkedList", linkedList_poor, "title" )
-    #attempt 2: linked list implementation with good hash function
+    # #attempt 2: linked list implementation with good hash function
     # print ( "\nAttempt 2:" )
     # testHashTables ( movies, "linkedList", linkedList_good, "title" )
-    #attempt 3: linked list implementation with better hash function
-    print ( "\nAttempt 3:" )
-    testHashTables ( movies, "linkedList", linkedList_better, "title" )
+    # #attempt 3: linked list implementation with better hash function
+    # print ( "\nAttempt 3:" )
+    # testHashTables ( movies, "linkedList", linkedList_better, "title" )
+    #attempt 4: linked list implementation with better2 hash function
+    print ( "\nAttempt 4:" )
+    testHashTables ( movies, "linkedList", linkedList_better2, "title" )
     # #attempt 6: linear probing implementation with poor hash function
     # print ( "\nAttempt 3:" )
     # testHashTables ( movies, "linearProbing", linearProbing_good, "quote" )
