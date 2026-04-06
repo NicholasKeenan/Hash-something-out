@@ -57,12 +57,16 @@ def main():
     tableSize = len ( movies ) * 2 #set the table size to be twice the number of records to reduce collisions
     
     #attempt 1: linked list implementation with poor hash function
+    print ( "\nAttempt 1:" )
     testHashTables ( movies, "linkedList", linkedList_poor, "title" )
     #attempt 2: linked list implementation with good hash function
+    print ( "\nAttempt 2:" )
     testHashTables ( movies, "linkedList", linkedList_good, "title" )
     #attempt 3: linear probing implementation with poor hash function
+    print ( "\nAttempt 3:" )
     testHashTables ( movies, "linearProbing", linearProbing_good, "quote" )
     #attempt 4: linear probing implementation with good hash function
+    print ( "\nAttempt 4:" )
     testHashTables ( movies, "linearProbing", linearProbing_poor, "quote" )
 
 if __name__ == "__main__":
