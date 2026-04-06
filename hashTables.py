@@ -29,6 +29,7 @@ class HashTable1:
             current = self.table [ index ]
             while current.next is not None:
                 current = current.next
+                self.collisions += 1 #increment the collision counter for each node traversed in the linked list
             current.next = new_node
             self.collisions += 1 #increment the collision counter
 
@@ -65,7 +66,7 @@ class HashTable2:
             index = ( index + 1 ) % self.size #increment the index and wrap around if it exceeds the size of the table
             self.collisions += 1 #increment the collision counter
         
-        self.table [ index ] = Node ( key, value ) #insert the new node at the calculated index
+        self.table [ index ] = ( key, value ) #insert the new node at the calculated index
 
     def lookup ( self, key ):
         index = self.hash_func ( key ) % self.size #calculate the index using the hash function and modulo operator

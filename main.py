@@ -1,4 +1,5 @@
 import time
+import csv
 from hashTables import *
 from hashFunctions import *
 from movie import Movie
@@ -7,64 +8,62 @@ from movie import Movie
 def dataLoader ( filename ):
 
     movies = [] #empty list to hold the movies
-    with open ( filename, 'r' ) as file: #open the file for reading
-        for line in file:
-            title, genre, release_date, director, box_office_revenue, rating, duration_minutes, production_company, quote = line.strip().split ( ',' )
+    with open ( filename, newline='', encoding = 'latin-1' ) as file: #open the file for reading
+        reader = csv.reader ( file )
+        next ( reader ) #skip the header row
+        for row in reader:
+            title, genre, release_date, director, box_office_revenue, rating, duration_minutes, production_company, quote = row
             movies.append ( Movie ( title, genre, release_date, director, box_office_revenue, rating, duration_minutes, production_company, quote ) )
     return movies
 
-def testHashTables ( movies, hash_table1, hash_table2, keyType, tableSize, hashFunc1, hashFunc2 ):
+def testHashTables ( movies, tableType, hashFunc, keyType ):
     #insert the movies into the hash tables and time the insertions
-    start_time = time.time()
-    for movie in movies:
-        if keyType == 'title':
-            hash_table1.insert ( movie.movie_title, movie )
-        else:
-            hash_table1.insert ( movie.quote, movie )
-    end_time = time.time()
-    print ( f"Hash Table 1 ({hashFunc1}): {end_time - start_time} seconds to insert {len(movies)} records" )
+    size = len ( movies ) * 2 #set the table size to be twice the number of records to reduce collisions
 
-    start_time = time.time()
-    for movie in movies:
-        if keyType == 'title':
-            hash_table2.insert ( movie.movie_title, movie )
-        else:
-            hash_table2.insert ( movie.quote, movie )
-    end_time = time.time()
-    print ( f"Hash Table 2 ({hashFunc2}): {end_time - start_time} seconds to insert {len(movies)} records" )
+    if tableType == "linkedList":
+        ht = HashTable1 ( size, hashFunc ) #create a hash table for the linked list implementation
+    else:
+        ht = HashTable2 ( size, hashFunc ) #create a hash table for the linear probing implementation
 
-    #lookup the movies in the hash tables and time the lookups
-    start_time = time.time()
+    #Insert Time
+    startTime = time.time() #start the timer
     for movie in movies:
-        if keyType == 'title':
-            hash_table1.lookup ( movie.movie_title )
+        if keyType == "title":
+            ht.insert ( movie.movie_title, movie ) #insert the movie into the hash table using the title as the key
         else:
-            hash_table1.lookup ( movie.quote )
-    end_time = time.time()
-    print ( f"Hash Table 1 ({hashFunc1}): {end_time - start_time} seconds to lookup {len(movies)} records" )
+            ht.insert ( movie.quote, movie ) #insert the movie into the hash table using the quote as the key
 
-    start_time = time.time()
+    insertTime = time.time() - startTime #end the timer
+
+    #lookup time
+    startTime = time.time() #start the timer
     for movie in movies:
-        if keyType == 'title':
-            hash_table2.lookup ( movie.movie_title )
-        else:
-            hash_table2.lookup ( movie.quote )
-    end_time = time.time()
-    print ( f"Hash Table 2 ({hashFunc2}): {end_time - start_time} seconds to lookup {len(movies)} records" )
+        if keyType == "title":
+            ht.lookup ( movie.movie_title ) #lookup the movie in the hash table using the title as the key
+        elif keyType == "quote":
+            ht.lookup ( movie.quote ) #lookup the movie in the hash table using the quote as the key
+
+    lookupTime = time.time() - startTime #end the timer
+
+    print ( "\nTable Type:             ", tableType )
+    print ( "Hash Function:          ", hashFunc.__name__ )
+    print ( "HashTable insert time:  ", insertTime )
+    print ( "HashTable lookup time:  ", lookupTime )
+    print ( "HashTable collisions:   ", ht.collisions )
+    print ( "HashTable wasted space: ", ht.find_wasted_space() )
 
 def main():
     movies = dataLoader ( 'MOCK_DATA.csv' ) #load the movies from the file
     tableSize = len ( movies ) * 2 #set the table size to be twice the number of records to reduce collisions
-
-    #List containing the hash functions to be tested
-    hashFunctions = [ 
-        linkedList_poor, 
-        linkedList_good, 
-        linearProbing_poor, 
-        linearProbing_good 
-        ]
     
-    for i in hashFunctions
+    #attempt 1: linked list implementation with poor hash function
+    testHashTables ( movies, "linkedList", linkedList_poor, "title" )
+    #attempt 2: linked list implementation with good hash function
+    testHashTables ( movies, "linkedList", linkedList_good, "title" )
+    #attempt 3: linear probing implementation with poor hash function
+    testHashTables ( movies, "linearProbing", linearProbing_good, "quote" )
+    #attempt 4: linear probing implementation with good hash function
+    testHashTables ( movies, "linearProbing", linearProbing_poor, "quote" )
 
 if __name__ == "__main__":
     main()
